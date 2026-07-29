@@ -1,7 +1,7 @@
 from datetime import datetime
 import re
 
-def validar_email(email):
+def validar_email(email: str) -> None:
     if not isinstance(email, str):
         raise TypeError("O email deve ser uma string.")
 
@@ -10,14 +10,15 @@ def validar_email(email):
     if not re.match(padrao_regex, email):
         raise ValueError("O email fornecido não é válido.")
 
-def estrurar_data(data_string: str) -> str:
+def estruturar_data(data_string: str) -> str:
     if not isinstance(data_string, str):
         raise TypeError("A data deve ser uma string.")
 
     data_sanitizada = data_string.replace(" ", "").replace("-", "/").strip()
 
     try:
-        return datetime.strptime(data_sanitizada, "%d/%m/%Y")  
+        # Valida se a data existe e formata, garantindo a conversão correta
+        datetime.strptime(data_sanitizada, "%d/%m/%Y")  
     except ValueError:
         raise ValueError("A data não está no formato correto (DD/MM/YYYY).")
 

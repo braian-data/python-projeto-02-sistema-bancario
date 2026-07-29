@@ -1,8 +1,3 @@
-# Arquitetura Refatorada e Normalizada do Sistema Bancário
-
-Abaixo está o diagrama de classes modelado sob os princípios de Orientação a Objetos (SOLID, Polimorfismo, e normalização de atributos).
-
-```
 ---
 config:
   theme: mc
@@ -24,6 +19,19 @@ class Cliente {
 
     +get_limite_restante()* : decimal
     +pode_sacar(valor: decimal)* : bool
+}
+
+class PessoaFisica {
+    #_cpf: String
+    +get_limite_restante(): decimal
+    +pode_sacar(valor: decimal): bool
+}
+
+class PessoaJuridica {
+    #_cnpj: String
+    #_razao_social: String
+    +get_limite_restante(): decimal
+    +pode_sacar(valor: decimal): bool
 }
 
 class PerfilAcesso {
@@ -88,6 +96,8 @@ class TransacaoCaixaEletronico {
 }
 
 %% Heranças
+Cliente <|-- PessoaFisica
+Cliente <|-- PessoaJuridica
 Transacao <|-- TransacaoOnline
 Transacao <|-- TransacaoCaixaEletronico
 Conta <|-- ContaPoupanca

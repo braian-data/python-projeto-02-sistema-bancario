@@ -13,14 +13,18 @@ class Cliente(ABC):
         self._limite_diario = 5
         self._renda_mensal = renda_mensal
 
-    @property
     def limite_restante(self):
         return self._limite_diario
 
 
-    @property
     @abstractmethod
     def pode_sacar(self):
-        if self._limite_diario > 0:
-            return True
-        return False
+        pass
+
+    def __eq__(self, other):
+        if not isinstance(other, Cliente):
+            return False
+        return self._email == other._email
+
+    def __repr__(self):
+        return f"Cliente(nome={self._nome}, email={self._email}, endereco={self._endereco}, telefone={self._telefone}, data_nascimento={self._data_nascimento}, data_criacao={self._data_criacao}, limite_diario={self._limite_diario}, renda_mensal={self._renda_mensal})"
