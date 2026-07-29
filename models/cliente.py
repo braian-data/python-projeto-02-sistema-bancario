@@ -1,5 +1,6 @@
-from validacoes.validacoes import validar_email, estrurar_data, estruturar_telefone
+from validacoes.validacoes import validar_email, estruturar_data, estruturar_telefone
 from abc import ABC, abstractmethod
+import decimal
 
 class Cliente(ABC):
     def __init__(self, nome, email, endereco, telefone, data_nascimento, data_criacao, renda_mensal):
@@ -8,17 +9,17 @@ class Cliente(ABC):
         self._email = email
         self._endereco = endereco
         self._telefone = estruturar_telefone(telefone)
-        self._data_nascimento = estrurar_data(data_nascimento)
-        self._data_criacao = estrurar_data(data_criacao)
-        self._limite_diario = 5
-        self._renda_mensal = renda_mensal
+        self._data_nascimento = estruturar_data(data_nascimento)
+        self._data_criacao = estruturar_data(data_criacao)
+        self._limite_diario = int(5)
+        self._qnt_saques_realizados = int(0)
+        self._renda_mensal = decimal.Decimal(renda_mensal)
 
     def limite_restante(self):
         return self._limite_diario
 
-
     @abstractmethod
-    def pode_sacar(self):
+    def pode_sacar(self, valor: decimal.Decimal) -> bool:
         pass
 
     def __eq__(self, other):
