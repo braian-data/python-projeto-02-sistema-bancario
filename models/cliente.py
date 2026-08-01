@@ -30,7 +30,6 @@ class Cliente(ABC):
     def __repr__(self):
         return f"Cliente(nome={self._nome}, email={self._email}, endereco={self._endereco}, telefone={self._telefone}, data_nascimento={self._data_nascimento}, data_criacao={self._data_criacao}, limite_diario={self._limite_diario}, renda_mensal={self._renda_mensal})"
 
-
 class PessoaFisica(Cliente):
     def __init__(self, cpf: str, nome, email, endereco, telefone, data_nascimento, data_criacao, renda_mensal):
         super().__init__(nome, email, endereco, telefone, data_nascimento, data_criacao, renda_mensal)
