@@ -1,6 +1,8 @@
 from cliente import Cliente, PessoaFisica, PessoaJuridica
+from abc import ABC, abstractmethod
 
-class Conta:
+
+class Conta(ABC):
     def __init__(self, cliente: Cliente, _saldo: decimal.Decimal = decimal.Decimal('0.0'), _status: str = "ativa"):
         self._cliente = cliente
         self._saldo = _saldo
