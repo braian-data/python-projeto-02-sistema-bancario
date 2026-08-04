@@ -1,6 +1,6 @@
-from cliente import Cliente, PessoaFisica, PessoaJuridica
+from cliente import Cliente
 from abc import ABC, abstractmethod
-
+import decimal
 
 class Conta(ABC):
     def __init__(self, cliente: Cliente, _saldo: decimal.Decimal = decimal.Decimal('0.0'), _status: str = "ativa"):
@@ -19,28 +19,34 @@ class Conta(ABC):
     __str__ = __repr__
 
     @abstractmethod
-    def adicionar_valor(self, valor: decimal.Decimal):
+    def adicionar_valor(self, valor: decimal.Decimal) -> decimal.Decimal:
+        pass
+
+    @property
+    def saldo(self):
+        return self._saldo
+    
+    @property
+    def status(self):
+        return self._status
+
+
+class ContaCorrente(Conta):
+    def __init__(self, cliente: Cliente, _saldo: decimal.Decimal = decimal.Decimal('0.0'), _status: str = "ativa"):
+        super().__init__(cliente, _saldo, _status)
+        self._tx = decimal.Decimal('0.01')  
+
+    @property
+    def tx(self):
+        return self._tx
+
+    def adicionar_valor(self, valor: decimal.Decimal) -> decimal.Decimal:
         if self._status != "ativa":
             raise ValueError("Conta não está ativa.")
         if valor <= 0:
             raise ValueError("Valor a ser adicionado deve ser positivo.")
         self._saldo += valor
-
-    @property
-    def saldo(self):
         return self._saldo
-    @property
-    def status(self):
-        return self._status
-
-class ContaCorrente(Conta):
-    def __init__(self, cliente: Cliente, _saldo: decimal.Decimal = decimal.Decimal('0.0'), _status: str = "ativa"):
-        super().__init__(cliente, _saldo, _status)
-        self._taxa = decimal.Decimal('0.01')  # Taxa de 1% para saques
-
-    @property
-    def taxa(self):
-        return self._taxa
 
     def sacar(self, valor: decimal.Decimal):
         if self._status != "ativa":
@@ -54,10 +60,19 @@ class ContaCorrente(Conta):
         self._saldo -= valor
         self._cliente._limite_diario -= valor
 
+
 class ContaPoupanca(Conta):
     def __init__(self, cliente: Cliente, _saldo: decimal.Decimal = decimal.Decimal('0.0'), _status: str = "ativa"):
         super().__init__(cliente, _saldo, _status)
-        self.__principal = decimal.Decimal('0.0')  # Valor principal da poupança
+        self.__principal = decimal.Decimal('0.0')
+
+    def adicionar_valor(self, valor: decimal.Decimal) -> decimal.Decimal:
+        if self._status != "ativa":
+            raise ValueError("Conta não está ativa.")
+        if valor <= 0:
+            raise ValueError("Valor a ser adicionado deve ser positivo.")
+        self._saldo += valor
+        return self._saldo
 
     def sacar(self, valor: decimal.Decimal):
         if self._status != "ativa":
