@@ -22,8 +22,7 @@ Em vez de apenas copiar sintaxe de bibliotecas prontas, decidi focar na base:
 
 ### Padrões Aplicados
 * **Validação Atômica:** Objetos só nascem se os dados passarem na auditoria.
-* **Polimorfismo (ABC):** Uso de classe abstrata `Usuario` com regras específicas para `Aluno`, `Professor` e `Bibliotecario`.
-* **Transação Defensiva:** A classe `Emprestimo` valida permissões e disponibilidade no ato da criação.
+* **Polimorfismo (ABC):** Uso de classe abstrata `Cliente` com regras específicas para `PessoaFisica` e `PessoaFisica`.
 
 ---
 
