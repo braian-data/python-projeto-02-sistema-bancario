@@ -15,8 +15,8 @@ Em vez de apenas copiar sintaxe de bibliotecas prontas, decidi focar na base:
 
 ## Arquitetura e Estrutura
 
-├── models/             # Entidades (Livro, Usuário, Empréstimo)
-├── services/           # Regras de negócio e acervo em memória (O(1))
+├── models/             # Entidades (banco, cartao, cliente, conta, perfil_acesso)
+├── services/           # Regras de negócio e trasancao em memória (O(1))
 ├── utils/              # Validações sintáticas puras (Regex, Datetime)
 └── main.py             # Interface no terminal e captura de erros
 
