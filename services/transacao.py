@@ -1,4 +1,4 @@
-from conta import Conta
+from models.conta import Conta
 from abc import ABC, abstractmethod
 import decimal
 from datetime import datetime

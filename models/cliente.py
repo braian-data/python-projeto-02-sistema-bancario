@@ -1,4 +1,4 @@
-from validacoes.validacoes import validar_email, estruturar_data, estruturar_telefone
+from utils.validacoes import validar_email, estruturar_data, estruturar_telefone
 from abc import ABC, abstractmethod
 import decimal
 

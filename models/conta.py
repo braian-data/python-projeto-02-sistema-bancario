@@ -1,6 +1,6 @@
-from cliente import Cliente
 from abc import ABC, abstractmethod
 import decimal
+from models.cliente import Cliente
 
 class Conta(ABC):
     def __init__(self, cliente: Cliente, _saldo: decimal.Decimal = decimal.Decimal('0.0'), _status: str = "ativa"):

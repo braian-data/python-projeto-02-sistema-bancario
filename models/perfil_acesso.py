@@ -1,4 +1,4 @@
-from cliente import Cliente ,PessoaFisica, PessoaJuridica
+from models.cliente import Cliente, PessoaFisica, PessoaJuridica
 
 class PerfilAcesso:
     def __init__(self, login, senha, cliente: Cliente) -> None:
